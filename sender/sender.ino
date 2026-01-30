@@ -1,0 +1,35 @@
+// ESP32 Ultrasonic Sensor (HC-SR04)
+// Trigger -> GPIO 18
+// Echo    -> GPIO 19
+
+const int TRIG_PIN = 18;
+const int ECHO_PIN = 19;
+
+void setup() {
+ Serial.begin(115200);
+
+ pinMode(TRIG_PIN, OUTPUT);
+ pinMode(ECHO_PIN, INPUT);
+
+ // Make sure trigger is LOW at start
+ digitalWrite(TRIG_PIN, LOW);
+}
+void call(){
+ digitalWrite(TRIG_PIN, LOW);
+ delayMicroseconds(2);
+ digitalWrite(TRIG_PIN, HIGH);
+ delayMicroseconds(10);
+ digitalWrite(TRIG_PIN, LOW);
+}
+
+void loop() {
+  call();
+  delayMicroseconds(15012);
+  for(int i=0;i<8;i++)
+  {
+    call();
+    delayMicroseconds(30012);
+  }
+  delay(1000);
+
+}
